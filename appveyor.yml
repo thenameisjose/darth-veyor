@@ -11,13 +11,7 @@ build:
   publish_nuget: true
   verbosity: detailed
 deploy:
-- provider: AzureAppServiceZipDeploy
-  appservice_environment: false
-  website: darth-veyor-101
-  username: $darth-veyor-101
-  password:
-    secure: VYEjjKlzz9psfI6g5mgnYTPpT56VmvHK8zutg2yVV16txsHz1/whQ4jDxOxWqnEM9Pc78GJmRfM4f5igtmO/4A==
-  async_deploy: true
-  retry_attempts: 3
+- provider: Environment
+  name: DEV Darth Veyor
   on:
     branch: master
