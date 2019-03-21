@@ -74,8 +74,8 @@ if($mode -eq "post"){
         $messageId = $response.ts
         $channelId = $response.channel
         Write-Host "Call success!:" $response
-        Set-AppveyorBuildVariable 'slack_message_id' $messageId
-        Set-AppveyorBuildVariable 'slack_message_channel' $channelId
+        $env:slack_message_id = $messageId
+        $env:slack_channel_id = $channelId
     }
     else
     {
@@ -87,8 +87,8 @@ if($mode -eq "post"){
 
 if($mode -eq "update") {
 
-    $messageId = Get-AppveyorBuildVariable 'slack_message_id' 
-    $channelId = Get-AppveyorBuildVariable 'slack_message_channel' 
+    $messageId = $env:slack_message_id
+    $channelId = $env:slack_message_channel
 
     if (-not ([string]::IsNullOrEmpty($messageId)))
     {

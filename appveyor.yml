@@ -6,6 +6,9 @@ skip_branch_with_pr: true
 configuration: Release
 cache:
   - packages -> **\packages.config
+environment:
+  slack_message_id: ''
+  slack_channel_id: ''
 before_build:
 - cmd: nuget restore
 - ps: .\Slackmessage.ps1 -mode 'post'
