@@ -13,7 +13,7 @@ param([string]$token="",
  	 return
  }
 
-$text = " "
+$text = ""
 $postUrl = "https://slack.com/api/chat.postMessage"
 $updateUrl = "https://slack.com/api/chat.update"
 $iconUrl = "https://pbs.twimg.com/profile_images/1604347359/logo_512x512_normal.png"
@@ -25,7 +25,7 @@ $selectedAttachment = switch ( $status )
         success 
         {
             '{
-                "fallback": "Required plain-text summary of the attachment.",
+                "fallback": "Success - Deploy LMS release to UAT.",
                 "color": "#228B22",
                 "fields": [
                     {
@@ -39,7 +39,7 @@ $selectedAttachment = switch ( $status )
         failed 
         {
             '{
-                "fallback": "Required plain-text summary of the attachment.",
+                "fallback": "Failed - Deploy LMS release to UAT.",
                 "color": "#FF0000",
                 "fields": [
                     {
@@ -54,7 +54,7 @@ $selectedAttachment = switch ( $status )
         default 
         { 
             '{
-                "fallback": "Required plain-text summary of the attachment.",
+                "fallback": "Pending - Deploy LMS release to UAT.",
                 "color": "#FFFF00",
                 "fields": [
                     {
@@ -70,14 +70,13 @@ $selectedAttachment = switch ( $status )
 
 if($mode -eq "post"){
     $postSlackMessage = @{
-        text=$text;
         token=$token;
         channel=$channel;
         attachments = $selectedAttachment;
         username="LMS Deploy"
     }
 
-    $response = Invoke-RestMethod -Uri $postUrl -Body $postSlackMessage 
+    $response = Invoke-RestMethod -Uri $postUrl -Body ($postSlackMessage | ConvertTo-Json -Depth 4) -ContentType 'application/json' -Method POST
 
     if($response.ok)
     {
@@ -103,7 +102,6 @@ if($mode -eq "update") {
     if (-not ([string]::IsNullOrEmpty($messageId)))
     {
     $postSlackMessage = @{
-        text=$text;
         token=$token;
         channel=$channelId;
         ts=$messageID;
@@ -112,18 +110,17 @@ if($mode -eq "update") {
 		}
 
 
-        $response = Invoke-RestMethod -Uri $updateUrl -Body $postSlackMessage 
+        $response = Invoke-RestMethod -Uri $updateUrl -Body ($postSlackMessage | ConvertTo-Json -Depth 4) -ContentType 'application/json' -Method POST
     }
     else
     {
      $postSlackMessage = @{
-        text=$text;
         token=$token;
         channel=$channel;
         attachments = $selectedAttachment;
         username="LMS Deploy"}
         
-        $response = Invoke-RestMethod -Uri $postUrl -Body $postSlackMessage 
+        $response = Invoke-RestMethod -Uri $postUrl -Body $postSlackMessage -Body ($postSlackMessage | ConvertTo-Json -Depth 4) -ContentType 'application/json' -Method POST
     }
 
     if($response.ok)
