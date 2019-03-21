@@ -13,7 +13,7 @@ param([string]$token="",
  	 return
  }
 
-$text = "LMS Deployment"
+$text = "Deployment triggered."
 $postUrl = "https://slack.com/api/chat.postMessage"
 $updateUrl = "https://slack.com/api/chat.update"
 $iconUrl = "https://pbs.twimg.com/profile_images/1604347359/logo_512x512_normal.png"
