@@ -11,7 +11,7 @@ environment:
   slack_channel_id: ''
 before_build:
 - cmd: nuget restore
-- ps: .\Slackmessage.ps1 -mode 'post'
+- ps: .\Slackmessage.ps1 -mode 'post' -token $env:SLACK_API_TOKEN
 build:
   publish_wap: true
   publish_nuget: true
@@ -22,4 +22,4 @@ deploy:
   on:
     branch: master
 on_success: 
-- ps: .\Slackmessage.ps1 -mode 'update' 
+- ps: .\Slackmessage.ps1 -mode 'update' -token $env:SLACK_API_TOKEN

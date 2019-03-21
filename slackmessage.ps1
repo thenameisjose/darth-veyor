@@ -1,9 +1,10 @@
-param([string]$token="xoxp-101647422818-102332869287-220469312550-38e9143c414aaf5731679544e5dd41df",
+param([string]$token="",
 [string]$mode="",
 [string]$channel="#deploy",
 [string]$messageid="",
 [string]$status="")
  
+
 $text = " "
 $postUrl = "https://slack.com/api/chat.postMessage"
 $updateUrl = "https://slack.com/api/chat.update"
