@@ -77,7 +77,7 @@ if($mode -eq "post"){
         username="LMS Deploy"
     }
 
-    $response = Invoke-RestMethod -Uri $postUrl -Body ($postSlackMessage | ConvertTo-Json -Depth 4) -ContentType 'application/json'  
+    $response = Invoke-RestMethod -Uri $postUrl -Body $postSlackMessage 
 
     if($response.ok)
     {
@@ -112,7 +112,7 @@ if($mode -eq "update") {
 		}
 
 
-        $response = Invoke-RestMethod -Uri $updateUrl -Body ($postSlackMessage | ConvertTo-Json -Depth 4) -ContentType 'application/json'  
+        $response = Invoke-RestMethod -Uri $updateUrl -Body $postSlackMessage 
     }
     else
     {
@@ -123,7 +123,7 @@ if($mode -eq "update") {
         attachments = $selectedAttachment;
         username="LMS Deploy"}
         
-        $response = Invoke-RestMethod -Uri $postUrl -Body ($postSlackMessage | ConvertTo-Json -Depth 4) -ContentType 'application/json'  
+        $response = Invoke-RestMethod -Uri $postUrl -Body $postSlackMessage 
     }
 
     if($response.ok)
