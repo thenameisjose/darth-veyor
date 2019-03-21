@@ -5,7 +5,10 @@ param([string]$token="",
 [string]$status="",
 [string]$branch="master")
  
- if($env:SLACK_API_TOKEN -ne $branch)
+ 
+ Write-Host "APPVEYOR_PULL_REQUEST_NUMBER:" $env:APPVEYOR_PULL_REQUEST_NUMBER
+ Write-Host "APPVEYOR_REPO_BRANCH:" $env:APPVEYOR_REPO_BRANCH
+ if($env:APPVEYOR_PULL_REQUEST_NUMBER -ne "")
  {
  	 return
  }
