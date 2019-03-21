@@ -13,7 +13,7 @@ param([string]$token="",
  	 return
  }
 
-$text = "LMS Deployment  "
+$text = ""
 $postUrl = "https://slack.com/api/chat.postMessage"
 $updateUrl = "https://slack.com/api/chat.update"
 $iconUrl = "https://pbs.twimg.com/profile_images/1604347359/logo_512x512_normal.png"
@@ -70,7 +70,6 @@ $selectedAttachment = switch ( $status )
 
 if($mode -eq "post"){
     $postSlackMessage = @{
-        text=$text;
         token=$token;
         channel=$channel;
         attachments = $selectedAttachment;
@@ -103,7 +102,6 @@ if($mode -eq "update") {
     if (-not ([string]::IsNullOrEmpty($messageId)))
     {
     $postSlackMessage = @{
-        text=$text;
         token=$token;
         channel=$channelId;
         ts=$messageID;
@@ -117,7 +115,6 @@ if($mode -eq "update") {
     else
     {
      $postSlackMessage = @{
-        text=$text;
         token=$token;
         channel=$channel;
         attachments = $selectedAttachment;
