@@ -4,28 +4,19 @@ branches:
   - master
 skip_branch_with_pr: true
 configuration: Release
+cache:
+  - packages -> **\packages.config
 before_build:
 - cmd: nuget restore
+- ps: .\Slackmessage.ps1 -mode 'post'
 build:
   publish_wap: true
   publish_nuget: true
   verbosity: detailed
-before_deploy:
-- ps: >-
-    $postSlackMessage = @{token="xoxp-101647422818-102332869287-581514935568-e98651109511976cbce8516308ebb8d5";channel="#deploy";text="Everything's on fire!";username="PowerShell";icon_url="https://pbs.twimg.com/profile_images/1604347359/logo_512x512_normal.png"}
-    $response = Invoke-RestMethod -Uri https://slack.com/api/chat.postMessage -Body $postSlackMessage -MaximumRetryCount 2
-    if($response.ok)
-    {
-        Set-AppveyorBuildVariable 'slack_message_id' $response.ts
-    }
-after_deploy:
-- ps: >-
-    $messageID = Set-AppveyorBuildVariable 'slack_message_id'
-    $postSlackMessage = @{token="xoxp-101647422818-102332869287-581514935568-e98651109511976cbce8516308ebb8d5";channel="#deploy";ts=$messageID;text="Everything's cool!";username="PowerShell";icon_url="https://pbs.twimg.com/profile_images/1604347359/logo_512x512_normal.png"}
-    $response = Invoke-RestMethod -Uri https://slack.com/api/chat.update -Body $postSlackMessage -MaximumRetryCount 2
-    
 deploy:
 - provider: Environment
   name: DEV Darth Veyor
   on:
     branch: master
+on_success: 
+- ps: .\Slackmessage.ps1 -mode 'update' 
