@@ -10,6 +10,8 @@ $postUrl = "https://slack.com/api/chat.postMessage"
 $updateUrl = "https://slack.com/api/chat.update"
 $iconUrl = "https://pbs.twimg.com/profile_images/1604347359/logo_512x512_normal.png"
 
+Write-Host "SLACK API TOKEN:" $env:SLACK_API_TOKEN
+
 $selectedAttachment = switch ( $status )
     {
         success 
