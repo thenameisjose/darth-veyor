@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{BCFD408A-836A-4780-98FC-B0EA1AAB03D9}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
+		slackmessage.ps1 = slackmessage.ps1
 	EndProjectSection
 EndProject
 Global
