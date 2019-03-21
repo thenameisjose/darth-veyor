@@ -2,7 +2,7 @@ param([string]$token="",
 [string]$mode="",
 [string]$channel="#deploy",
 [string]$messageid="",
-[string]$status=""
+[string]$status="",
 [string]$branch="master")
  
  if($env:SLACK_API_TOKEN -ne $branch)
