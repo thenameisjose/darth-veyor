@@ -12,6 +12,7 @@ $iconUrl = "https://pbs.twimg.com/profile_images/1604347359/logo_512x512_normal.
 
 Write-Host "SLACK API TOKEN:" $env:SLACK_API_TOKEN
 
+
 $selectedAttachment = switch ( $status )
     {
         success 
