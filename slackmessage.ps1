@@ -24,7 +24,7 @@ $selectedAttachment = switch ( $status )
     {
         success 
         {
-            '[{
+            '{
                 "fallback": "Required plain-text summary of the attachment.",
                 "color": "#228B22",
                 "fields": [
@@ -34,11 +34,11 @@ $selectedAttachment = switch ( $status )
                         "short": false
                     }
                 ]
-            }]'
+            }'
         }
         failed 
         {
-            '[{
+            '{
                 "fallback": "Required plain-text summary of the attachment.",
                 "color": "#FF0000",
                 "fields": [
@@ -48,12 +48,12 @@ $selectedAttachment = switch ( $status )
                         "short": false
                     }
                 ]
-            }]'
+            }'
 
         }
         default 
         { 
-            '[{
+            '{
                 "fallback": "Required plain-text summary of the attachment.",
                 "color": "#FFFF00",
                 "fields": [
@@ -63,7 +63,7 @@ $selectedAttachment = switch ( $status )
                         "short": false
                     }
                 ]
-            }]'
+            }'
         }
     }
 
@@ -77,7 +77,7 @@ if($mode -eq "post"){
         username="LMS Deploy"
     }
 
-    $response = Invoke-RestMethod -Uri $postUrl -Body $postSlackMessage 
+    $response = Invoke-RestMethod -Uri $postUrl -Body ($postSlackMessage | ConvertTo-Json -Depth 4) -ContentType 'application/json'  
 
     if($response.ok)
     {
@@ -112,7 +112,7 @@ if($mode -eq "update") {
 		}
 
 
-        $response = Invoke-RestMethod -Uri $updateUrl -Body $postSlackMessage 
+        $response = Invoke-RestMethod -Uri $updateUrl -Body ($postSlackMessage | ConvertTo-Json -Depth 4) -ContentType 'application/json'  
     }
     else
     {
@@ -123,7 +123,7 @@ if($mode -eq "update") {
         attachments = $selectedAttachment;
         username="LMS Deploy"}
         
-        $response = Invoke-RestMethod -Uri $postUrl -Body $postSlackMessage 
+        $response = Invoke-RestMethod -Uri $postUrl -Body ($postSlackMessage | ConvertTo-Json -Depth 4) -ContentType 'application/json'  
     }
 
     if($response.ok)
