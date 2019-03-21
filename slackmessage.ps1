@@ -92,7 +92,7 @@ if($mode -eq "post"){
 if($mode -eq "update") {
 
     $messageId = $env:slack_message_id
-    $channelId = $env:slack_message_channel
+    $channelId = $env:slack_channel_id
 
     if (-not ([string]::IsNullOrEmpty($messageId)))
     {
