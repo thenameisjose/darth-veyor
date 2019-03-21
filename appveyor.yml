@@ -10,6 +10,11 @@ build:
   publish_wap: true
   publish_nuget: true
   verbosity: detailed
+before_deploy:
+- ps: >-
+    $body = @{ text="Everything's on fire!"; channel="#general"; username=$Username; icon_emoji=":fire:";} | ConvertTo-Json
+
+    Invoke-WebRequest -Method Post -Uri "https://hooks.slack.com/services/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" -Body $body
 deploy:
 - provider: Environment
   name: DEV Darth Veyor
