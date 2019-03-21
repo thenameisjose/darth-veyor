@@ -5,7 +5,7 @@ param([string]$token="",
 [string]$status="",
 [string]$branch="master")
  
- if($env:SLACK_API_TOKEN -ne $branch)
+ if($env:APPVEYOR_REPO_BRANCH -ne $branch)
  {
  	 return
  }
