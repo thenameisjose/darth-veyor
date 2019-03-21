@@ -5,6 +5,7 @@ param([string]$token="",
 [string]$status="",
 [string]$branch="master")
  
+ Write-Host "APPVEYOR_REPO_BRANCH:" $env:APPVEYOR_REPO_BRANCH
  if($env:APPVEYOR_REPO_BRANCH -ne $branch)
  {
  	 return
