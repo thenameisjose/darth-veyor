@@ -67,8 +67,7 @@ if($mode -eq "post"){
         token=$token;
         channel=$channel;
         attachments = $selectedAttachment;
-        username="LMS Deploy";
-        icon_url=$iconUrl
+        username="LMS Deploy"
     }
 
     $response = Invoke-RestMethod -Uri $postUrl -Body $postSlackMessage 
@@ -102,8 +101,8 @@ if($mode -eq "update") {
         channel=$channelId;
         ts=$messageID;
         attachments=$selectedAttachment;
-        username="LMS Deploy";
-        icon_url=$iconUrl}
+        username="LMS Deploy"
+		}
 
 
         $response = Invoke-RestMethod -Uri $updateUrl -Body $postSlackMessage 
@@ -115,8 +114,7 @@ if($mode -eq "update") {
         token=$token;
         channel=$channel;
         attachments = $selectedAttachment;
-        username="LMS Deploy";
-        icon_url=$iconUrl}
+        username="LMS Deploy"}
         
         $response = Invoke-RestMethod -Uri $postUrl -Body $postSlackMessage 
     }
