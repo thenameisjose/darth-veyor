@@ -2,8 +2,13 @@ param([string]$token="",
 [string]$mode="",
 [string]$channel="#deploy",
 [string]$messageid="",
-[string]$status="")
+[string]$status="",
+[string]$branch="master")
  
+ if($env:SLACK_API_TOKEN -ne $branch)
+ {
+ 	 return
+ }
 
 $text = " "
 $postUrl = "https://slack.com/api/chat.postMessage"
@@ -11,7 +16,6 @@ $updateUrl = "https://slack.com/api/chat.update"
 $iconUrl = "https://pbs.twimg.com/profile_images/1604347359/logo_512x512_normal.png"
 
 Write-Host "SLACK API TOKEN:" $env:SLACK_API_TOKEN
-
 
 $selectedAttachment = switch ( $status )
     {
