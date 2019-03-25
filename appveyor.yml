@@ -25,3 +25,5 @@ on_success:
 - ps: .\Slackmessage.ps1 -mode 'update' -token $env:SLACK_API_TOKEN -status "success"
 on_failure: 
 - ps: .\Slackmessage.ps1 -mode 'update' -token $env:SLACK_API_TOKEN -status "failed"
+on_finish: 
+- ps: Write-Host "FINISHED! - JC BUILD STATUS:" $env:SLACK_API_TOKEN

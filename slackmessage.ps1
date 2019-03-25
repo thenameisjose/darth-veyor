@@ -8,7 +8,7 @@ param([string]$token="",
  
  Write-Host "APPVEYOR_PULL_REQUEST_NUMBER:" $env:APPVEYOR_PULL_REQUEST_NUMBER
  Write-Host "APPVEYOR_REPO_BRANCH:" $env:APPVEYOR_REPO_BRANCH
- if((-not ([string]::IsNullOrEmpty($env:APPVEYOR_PULL_REQUEST_NUMBER))) -and $env:APPVEYOR_REPO_BRANCH -eq $branch)
+ if(-not ([string]::IsNullOrEmpty($env:APPVEYOR_PULL_REQUEST_NUMBER)) -or $env:APPVEYOR_REPO_BRANCH -ne $branch)
  {
  	 return
  }
@@ -30,7 +30,7 @@ $selectedAttachment = switch ( $status )
                 "fields": [
                     {
                         "title": "Success",
-                        "value": "Deploy LMS release to UAT",
+                        "value": "LMS release to UAT",
                         "short": false
                     }
                 ]
@@ -44,7 +44,7 @@ $selectedAttachment = switch ( $status )
                 "fields": [
                     {
                         "title": "Failed",
-                        "value": "Deploy LMS release to UAT",
+                        "value": "LMS release to UAT",
                         "short": false
                     }
                 ]
@@ -59,7 +59,7 @@ $selectedAttachment = switch ( $status )
                 "fields": [
                     {
                         "title": "Pending",
-                        "value": "Deploy LMS release to UAT",
+                        "value": "LMS release to UAT",
                         "short": false
                     }
                 ]
