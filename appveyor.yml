@@ -9,6 +9,7 @@ cache:
 environment:
   slack_message_id: ''
   slack_channel_id: ''
+  git_message_text: ''
 before_build:
 - cmd: nuget restore
 - ps: .\Slackmessage.ps1 -mode 'post' -token $env:SLACK_API_TOKEN
