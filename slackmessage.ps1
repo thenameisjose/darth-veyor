@@ -24,6 +24,7 @@ param([string]$token="",
 	$env:git_message_text = $gitData['message'] 
 }
  
+
 $text = "Deployment triggered. `n" + $env:git_message_text
 $postUrl = "https://slack.com/api/chat.postMessage"
 $updateUrl = "https://slack.com/api/chat.update"
