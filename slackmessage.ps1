@@ -6,6 +6,7 @@ param([string]$token="",
 [string]$branch="master"
 )
  
+
  
  Write-Host "APPVEYOR_PULL_REQUEST_NUMBER:" $env:APPVEYOR_PULL_REQUEST_NUMBER
  Write-Host "APPVEYOR_REPO_BRANCH:" $env:APPVEYOR_REPO_BRANCH
@@ -19,7 +20,7 @@ param([string]$token="",
 
  if ([string]::IsNullOrEmpty($env:git_message_text))
 {
-	$gitData = ConvertFrom-StringData (git log -1 --no-merges --format=format:"commitId=%H%nmessage=%s%ncommitted=%aD" | out-string)
+	$gitData = ConvertFrom-StringData (git log -1 --no-merges --format=format:"commitId=%H%nmessage=%B%ncommitted=%aD" | out-string)
 	if ($gitData['message'] -eq "") { $gitData['message'] = "No commit message available for $($gitData['commitid'])" }
 	$env:git_message_text = $gitData['message'] 
 }
