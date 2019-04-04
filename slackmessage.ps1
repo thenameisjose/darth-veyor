@@ -8,12 +8,15 @@ param([string]$token="",
  
  Write-Host "APPVEYOR_PULL_REQUEST_NUMBER:" $env:APPVEYOR_PULL_REQUEST_NUMBER
  Write-Host "APPVEYOR_REPO_BRANCH:" $env:APPVEYOR_REPO_BRANCH
+ Write-Host "APPVEYOR_PULL_REQUEST_TITLE:" $env:APPVEYOR_PULL_REQUEST_TITLE
+ Write-Host "APPVEYOR_REPO_COMMIT_MESSAGE:" $env:APPVEYOR_REPO_COMMIT_MESSAGE 
+
  if(-not ([string]::IsNullOrEmpty($env:APPVEYOR_PULL_REQUEST_NUMBER)) -or $env:APPVEYOR_REPO_BRANCH -ne $branch)
  {
  	 return
  }
 
-$text = "Deployment triggered. \n" + $env:APPVEYOR_REPO_COMMIT_MESSAGE
+$text = "Deployment triggered. \n" + $env:APPVEYOR_PULL_REQUEST_TITLE
 $postUrl = "https://slack.com/api/chat.postMessage"
 $updateUrl = "https://slack.com/api/chat.update"
 $iconUrl = "https://pbs.twimg.com/profile_images/1604347359/logo_512x512_normal.png"
