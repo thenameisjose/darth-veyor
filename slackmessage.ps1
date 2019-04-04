@@ -16,7 +16,7 @@ param([string]$token="",
  	 return
  }
 
-$text = "Deployment triggered. \n" + $env:APPVEYOR_PULL_REQUEST_TITLE
+$text = "Deployment triggered. \n" + $env:APPVEYOR_REPO_COMMIT_MESSAGE
 $postUrl = "https://slack.com/api/chat.postMessage"
 $updateUrl = "https://slack.com/api/chat.update"
 $iconUrl = "https://pbs.twimg.com/profile_images/1604347359/logo_512x512_normal.png"
