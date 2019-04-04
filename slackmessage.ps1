@@ -18,7 +18,7 @@ param([string]$token="",
  $gitData = ConvertFrom-StringData (git log -1 --format=format:"commitId=%H%nmessage=%s%ncommitted=%aD" | out-string)
 if ($gitData['message'] -eq "") { $gitData['message'] = "No commit message available for $($gitData['commitid'])" }
 
-$text = "Deployment triggered. \n" + $gitData
+$text = "Deployment triggered. \n" + $gitData['message']
 $postUrl = "https://slack.com/api/chat.postMessage"
 $updateUrl = "https://slack.com/api/chat.update"
 $iconUrl = "https://pbs.twimg.com/profile_images/1604347359/logo_512x512_normal.png"
